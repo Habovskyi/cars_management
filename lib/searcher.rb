@@ -1,4 +1,4 @@
-class SearchEngine
+class Searcher
   attr_reader :user_rules, :database
 
   def initialize(user_rules, database)
@@ -6,14 +6,14 @@ class SearchEngine
     @database = database
   end
 
-  def filter
+  def filter_rules
     user_rules.each do |user_key, user_value|
-      filter_rules(user_key, user_value)
+      compare(user_key, user_value)
     end
     database
   end
 
-  def filter_rules(key, value)
+  def compare(key, value)
     case key
     when :make, :model
       database.select! { |cars| cars[key.to_s].casecmp(value).zero? }

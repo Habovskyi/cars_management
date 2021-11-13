@@ -1,8 +1,10 @@
-class SortResult
+# frozen_string_literal: true
+
+class Sorter
   attr_reader :data, :direction, :type
 
-  SORT_DIRECTION_DEFAULT = 'asc'.freeze
-  SORT_TYPE_DEFAULT = 'date_added'.freeze
+  SORT_DIRECTION = 'asc'
+  SORT_TYPE = 'price'
 
   def initialize(data, direction, type)
     @data = data
@@ -11,17 +13,17 @@ class SortResult
   end
 
   def sorting_option
-    type == SORT_TYPE_DEFAULT ? sorting_by_date_added : sorting_by_price
+    type == SORT_TYPE ? sorting_by_price : sorting_by_date_added
   end
 
   def sorting_by_price
     data.sort_by! { |car| car['price'] }
-    direction == SORT_DIRECTION_DEFAULT ? data : data.reverse
+    direction == SORT_DIRECTION ? data : data.reverse
   end
 
   def sorting_by_date_added
     data.sort_by! { |car| Date.strptime(car['date_added'], '%d/%m/%y') }
-    direction == SORT_DIRECTION_DEFAULT ? data : data.reverse
+    direction == SORT_DIRECTION ? data : data.reverse
   end
 end
 

@@ -1,4 +1,4 @@
-class PrintResult
+class Printer
   attr_reader :result
 
   def initialize(result)

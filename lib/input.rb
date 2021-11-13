@@ -22,15 +22,11 @@ class Input
 
   def sort_direction
     puts 'Please choose sort direction(desc|asc):'
-    direction = gets.chomp
-    direction = 'desc' if direction != 'asc'
-    direction
+    gets.chomp
   end
 
   def sort_option
     puts 'Please choose sort option (date_added|price):'
-    option = gets.chomp
-    option = 'date_added' if option != 'price'
-    option
+    gets.chomp
   end
 end
