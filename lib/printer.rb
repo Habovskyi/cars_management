@@ -1,6 +1,6 @@
-class Printer
-  attr_reader :result
+# frozen_string_literal: true
 
+class Printer
   def initialize(result)
     @result = result
   end
@@ -13,4 +13,8 @@ class Printer
       puts '-' * 30
     end
   end
+
+  private
+
+  attr_reader :result
 end

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Sorter
-  attr_reader :data, :direction, :type
-
   SORT_DIRECTION = 'asc'
   SORT_TYPE = 'price'
 
@@ -25,5 +23,9 @@ class Sorter
     data.sort_by! { |car| Date.strptime(car['date_added'], '%d/%m/%y') }
     direction == SORT_DIRECTION ? data : data.reverse
   end
+
+  private
+
+  attr_reader :data, :direction, :type
 end
 

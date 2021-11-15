@@ -1,6 +1,6 @@
-class UpdateData
-  attr_reader :user_rules, :database
+# frozen_string_literal: true
 
+class UpdateData
   def initialize(user_rules, database)
     @user_rules = user_rules
     @database = database
@@ -13,4 +13,8 @@ class UpdateData
     user_rules[:price_to] = max_price if user_rules[:price_to].to_i.zero?
     user_rules
   end
+
+  private
+
+  attr_reader :user_rules, :database
 end

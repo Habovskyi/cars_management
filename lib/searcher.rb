@@ -1,6 +1,6 @@
-class Searcher
-  attr_reader :user_rules, :database
+# frozen_string_literal: true
 
+class Searcher
   def initialize(user_rules, database)
     @user_rules = user_rules
     @database = database
@@ -25,5 +25,8 @@ class Searcher
       database
     end
   end
-end
 
+  private
+
+  attr_reader :user_rules, :database
+end
