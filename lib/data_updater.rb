@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UpdateData
+class DataUpdater
   def initialize(user_rules, database)
     @user_rules = user_rules
     @database = database
