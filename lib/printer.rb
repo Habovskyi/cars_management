@@ -5,7 +5,7 @@ class Printer
     @result = result
   end
 
-  def print
+  def call
     puts 'Results:'
     result.each do |car|
       car.each { |key, value| puts "#{key.capitalize}: #{value}" }
