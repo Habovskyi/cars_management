@@ -1,6 +1,4 @@
 class Input
-  attr_reader :user_rules
-
   def initialize
     @user_rules = { 'make': ' ',
                     'model': ' ',
@@ -29,4 +27,8 @@ class Input
     puts 'Please choose sort option (date_added|price):'
     gets.chomp
   end
+
+  private
+
+  attr_reader :user_rules
 end

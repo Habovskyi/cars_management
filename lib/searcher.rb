@@ -13,6 +13,8 @@ class Searcher
     database
   end
 
+  private
+
   def compare(key, value)
     case key
     when :make, :model
@@ -25,8 +27,6 @@ class Searcher
       database
     end
   end
-
-  private
 
   attr_reader :user_rules, :database
 end
