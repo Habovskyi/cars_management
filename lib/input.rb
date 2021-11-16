@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class for inputting search(user) rules
 class Input
   def initialize
     @user_rules = { make: '',

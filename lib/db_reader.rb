@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class for working with database
 class Database
   FILEPATH = File.dirname(__FILE__)
   NAME_DB = 'db.yml'

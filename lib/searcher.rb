@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class for searching records
 class Searcher
   def initialize(user_rules, database)
     @user_rules = user_rules

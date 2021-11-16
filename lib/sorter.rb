@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class for sorting result
 class Sorter
   SORT_DIRECTION = 'asc'
   SORT_TYPE = 'price'
@@ -28,4 +29,3 @@ class Sorter
 
   attr_reader :data, :direction, :type
 end
-

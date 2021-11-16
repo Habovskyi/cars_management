@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class for printing results
 class Printer
   def initialize(result)
     @result = result
