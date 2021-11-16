@@ -8,7 +8,7 @@ class DataUpdater
 
   def call
     max_price = database.max_by { |car| car['price'] }['price']
-    max_year = database.max_by { |car| car['year'] }['year'].freeze
+    max_year = database.max_by { |car| car['year'] }['year']
     user_rules[:year_to] = max_year if user_rules[:year_to].to_i.zero?
     user_rules[:price_to] = max_price if user_rules[:price_to].to_i.zero?
     user_rules
