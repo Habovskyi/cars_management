@@ -6,7 +6,7 @@ class Searcher
     @database = database
   end
 
-  def filter_rules
+  def call
     user_rules.each do |user_key, user_value|
       compare(user_key, user_value)
     end

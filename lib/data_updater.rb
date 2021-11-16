@@ -6,7 +6,7 @@ class DataUpdater
     @database = database
   end
 
-  def value_update
+  def call
     max_price = database.max_by { |car| car['price'] }['price']
     max_year = database.max_by { |car| car['year'] }['year'].freeze
     user_rules[:year_to] = max_year if user_rules[:year_to].to_i.zero?

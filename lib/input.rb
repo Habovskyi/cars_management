@@ -10,7 +10,7 @@ class Input
                     'price_to': 0 }
   end
 
-  def input_rules
+  def call
     puts 'Please select search rules.'
     user_rules.each do |key, value|
       puts "Please choose #{key}: "
