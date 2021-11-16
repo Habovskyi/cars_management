@@ -18,14 +18,26 @@ class Searcher
   def compare(key, value)
     case key
     when :make, :model
-      database.select! { |cars| cars[key.to_s].casecmp(value).zero? }
+      compare_string(key, value)
     when :year_from, :price_from
-      database.select! { |cars| key == :year_from ? (cars['year'] >= value.to_i) : (cars['price'] >= value.to_i) }
+      compare_number_from(key, value)
     when :year_to, :price_to
-      database.select! { |cars| key == :year_to ? (cars['year'] <= value.to_i) : (cars['price'] <= value.to_i) }
+      compare_number_to(key, value)
     else
       database
     end
+  end
+
+  def compare_string(key, value)
+    database.select! { |cars| cars[key.to_s].casecmp(value).zero? }
+  end
+
+  def compare_number_to(key, value)
+    database.select! { |cars| key == :year_to ? (cars['year'] <= value.to_i) : (cars['price'] <= value.to_i) }
+  end
+
+  def compare_number_from(key, value)
+    database.select! { |cars| key == :year_from ? (cars['year'] >= value.to_i) : (cars['price'] >= value.to_i) }
   end
 
   attr_reader :user_rules, :database
