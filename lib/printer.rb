@@ -11,15 +11,16 @@ class Printer
     puts 'Results:'
     result.each do |car|
       car.each { |key, value| puts "#{key.capitalize}: #{value}" }
-      puts
       puts '-' * 30
     end
   end
 
   def statistic(statistic)
+    puts '-' * 30
     puts 'Statistic:'
     puts "Total Quantity: #{statistic[:total_quantity]}"
     puts "Requests Quantity: #{statistic[:requests_quantity]}"
+    puts '-' * 30
   end
 
   private
