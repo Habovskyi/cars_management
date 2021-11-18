@@ -8,7 +8,7 @@ class Database
   def read_database(name_db = NAME_DB)
     YAML.load_file("#{FILEPATH}/../db/#{name_db}")
   rescue Errno::ENOENT
-    abort 'No car db found, make sure the file exists or check the path to this file.'
+    abort 'No found db.yml file with cars was found. Please open the README.md file and perform step 4.'
   end
 
   def write_to_database(data, name_db)
