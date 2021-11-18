@@ -5,3 +5,8 @@
 2. Perform the operation of adding a remote repository git clone https://github.com/Habovskyi/cars_management.git
 3. Change the working directory to the project directory`cd cars_management`
 4. Run the project for execution in terminal `irb index.rb`
+
+### Note
+You should upload the file with the cars yourself in the directory `db/db.yml`.
+
+The file for saving statistics will be created automatically.

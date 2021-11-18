@@ -5,10 +5,10 @@ class Input
   def initialize
     @user_rules = { make: '',
                     model: '',
-                    year_from: 0,
-                    year_to: 0,
-                    price_from: 0,
-                    price_to: 0 }
+                    year_from: '',
+                    year_to: '',
+                    price_from: '',
+                    price_to: '' }
   end
 
   def call
@@ -16,7 +16,6 @@ class Input
     user_rules.each do |key, _value|
       puts "Please choose #{key}: "
       user_rules[key] = gets.chomp
-      user_rules.delete_if { |_key, value| value == '' }
     end
     user_rules
   end

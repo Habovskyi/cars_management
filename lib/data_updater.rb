@@ -11,6 +11,7 @@ class DataUpdater
     change_max_value
     user_rules[:year_to] = @max_year if user_rules[:year_to].to_i.zero?
     user_rules[:price_to] = @max_price if user_rules[:price_to].to_i.zero?
+    user_rules.delete_if { |_key, value| value == '' }
     user_rules
   end
 
