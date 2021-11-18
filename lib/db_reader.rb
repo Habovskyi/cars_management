@@ -5,6 +5,10 @@ class Database
   FILEPATH = File.dirname(__FILE__)
   NAME_DB = 'db.yml'
 
+  def initialize(name_db = NAME_DB)
+    @name = name_db
+  end
+
   def read(name_db = NAME_DB)
     YAML.load_file("#{FILEPATH}/../db/#{name_db}")
   rescue Errno::ENOENT
