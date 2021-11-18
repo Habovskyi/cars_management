@@ -11,10 +11,6 @@ class Statistic
     @db = Database.new(DB_NAME)
   end
 
-  def load_statistic
-    @data = @db.call(DB_NAME)
-  end
-
   def call
     if load_statistic == false
       @statistic = [{ search: user_rules, statistic: create_statistic }]
@@ -26,6 +22,10 @@ class Statistic
   end
 
   private
+
+  def load_statistic
+    @data = @db.call(DB_NAME)
+  end
 
   def unique_record
     @data.each do |request|
