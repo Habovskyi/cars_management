@@ -5,9 +5,10 @@ class Statistic
   DB_NAME = 'searches.yml'
   DEFAULT_REQUEST_COUNTER = 1
 
-  def initialize(user_rules, result_searching)
+  def initialize(user_rules, result_searching, database)
     @user_rules = user_rules
     @result_searching = result_searching
+    @database = database
   end
 
   def load_statistic
@@ -16,6 +17,7 @@ class Statistic
 
   def call
     if load_statistic == false
+
       @statistic = [{ search: user_rules,
                       statistic: create_statistic }]
       Database.new.write_to_database(@statistic, DB_NAME)
@@ -39,7 +41,7 @@ class Statistic
   end
 
   def add_new_record
-    @statistic = { search: user_rules,
+    @statistic = { search: @user_rules,
                    statistic: create_statistic }
     @data << @statistic
   end
@@ -63,5 +65,5 @@ class Statistic
     @count
   end
 
-  attr_reader :user_rules, :result_searching
+  attr_reader :user_rules, :result_searching, :database
 end
