@@ -23,8 +23,8 @@ class DataUpdater
 
   def validate_string
     database.each do |cars|
-      user_rules[:make].downcase == cars['make'].downcase ? cars['make'] : user_rules[:make]
-      user_rules[:model].downcase == cars['model'].downcase ? cars['model'] : user_rules[:model]
+      user_rules[:make] = cars['make'] if cars['make'].casecmp(user_rules[:make]).zero?
+      user_rules[:model] = cars['model'] if cars['model'].casecmp(user_rules[:model]).zero?
     end
     user_rules
   end
