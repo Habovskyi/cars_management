@@ -57,12 +57,8 @@ class Statistic
   end
 
   def request_counter
-    if @data == false
-      @count = DEFAULT_REQUEST_COUNTER
-    else
-      @data.each do |request|
-        @count = request.dig(:statistic, :requests_quantity) + 1 if request[:search] == user_rules
-      end
+    @data.each do |request|
+      @count = request.dig(:statistic, :requests_quantity) + 1 if request[:search] == user_rules
     end
     @count
   end
