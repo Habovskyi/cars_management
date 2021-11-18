@@ -2,7 +2,7 @@
 
 require_relative 'lib/autoload'
 
-database = Database.new.read_database
+database = Database.new.read
 user_rules = Input.new.call
 update_user_rules = DataUpdater.new(user_rules.clone, database).call('number')
 sort_option = Input.new.sort_option
