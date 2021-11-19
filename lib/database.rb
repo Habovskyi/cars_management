@@ -6,13 +6,13 @@ class Database
   NAME_DB = 'db.yml'
 
   def initialize(name_db = NAME_DB)
-    @name = name_db
-    create_file unless File.file?(path)
-    @db = File.open(path, 'r+')
+    @path = "#{FILEPATH}/../db/#{name_db}"
+    create_file unless File.file?(@path)
+    @db = File.open(@path, 'r+')
   end
 
   def read
-    YAML.load_file(path)
+    YAML.load_file(@db)
   end
 
   def write(data)
@@ -23,12 +23,8 @@ class Database
   private
 
   def create_file
-    File.new(path, 'w')
+    File.new(@path, 'w')
   end
 
-  def path
-    "#{FILEPATH}/../db/#{@name}"
-  end
-
-  attr_reader :db, :name
+  attr_reader :db, :path
 end
