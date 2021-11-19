@@ -14,7 +14,7 @@ class Statistic
   def call
     if load_statistic == false
       @statistic = [{ search: user_rules, statistic: create_statistic }]
-      @db.write(@statistic, DB_NAME)
+      @db.write(@statistic)
     else
       unique_record
     end
@@ -24,7 +24,7 @@ class Statistic
   private
 
   def load_statistic
-    @data = @db.call(DB_NAME)
+    @data = @db.read
   end
 
   def unique_record
@@ -48,7 +48,7 @@ class Statistic
   end
 
   def write_statistic
-    @db.write(@data, DB_NAME)
+    @db.write(@data)
   end
 
   def total_counter
