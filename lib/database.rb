@@ -7,23 +7,23 @@ class Database
 
   def initialize(name_db = NAME_DB)
     @path = "#{FILEPATH}/../db/#{name_db}"
-    create_file unless File.file?(@path)
-    @db = File.open(@path, 'r+')
+    create_file unless File.file?(path)
+    @db = File.open(path, 'r+')
   end
 
   def read
-    YAML.load_file(@db)
+    YAML.load_file(db)
   end
 
   def write(data)
-    @db.write(data.to_yaml)
-    @db.close
+    db.write(data.to_yaml)
+    db.close
   end
 
   private
 
   def create_file
-    File.new(@path, 'w')
+    File.new(path, 'w')
   end
 
   attr_reader :db, :path
