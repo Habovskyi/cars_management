@@ -1,0 +1,32 @@
+ukr:
+  input:
+    search_rules:
+      select: 'Будь ласка, виберіть правила пошуку.'
+      choose: 'Будь ласка, виберіть'
+      keys:
+        make: 'виробника'
+        model: 'модель'
+        year_from: 'рік від'
+        year_to: 'рік до'
+        price_from: 'ціну від'
+        price_to: 'ціну до'
+    search_sort:
+      direction: 'Будь-ласка, виберіть напрямок сортування (за спаданням (desc) | за зростанням (asc)):'
+      type: 'Будь ласка, виберіть параметр сортування (дата_додавання (date_added) | ціна (price)):'
+  print:
+    result: 'Результат'
+    statistic: 'Статистика'
+    total_quantity: 'Кількість знайдених:'
+    requests_quantity: 'Кількість запитів:'
+    keys:
+      id: 'Ідентифікатор'
+      make: 'Виробник'
+      model: 'Модель'
+      year: 'Рік'
+      odometer: 'Пробіг'
+      price: 'Ціна'
+      description: 'Опис'
+      date_added: 'Дата додавання'
+  message_create_database: 'Створено файл бази даних. Будь ласка, заповніть його перед наступним запуском програми.'
+
+
