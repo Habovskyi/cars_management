@@ -16,8 +16,8 @@ en:
   print:
     result: 'Result'
     statistic: 'Statistic'
-    total_quantity: 'Total Quantity:'
-    requests_quantity: 'Requests Quantity:'
+    total: 'Total Quantity:'
+    requests: 'Requests Quantity:'
     keys:
       id: 'ID'
       make: 'Make'

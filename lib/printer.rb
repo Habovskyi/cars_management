@@ -19,7 +19,7 @@ class Printer
     rows = []
     result.each do |car|
       car.each do |key, value|
-        rows << [I18n.t("print.keys.#{key}").to_s.colorize(:green), value.to_s.colorize(:blue)]
+        rows << [I18n.t("print.keys.#{key}").to_s.colorize(:green), value.to_s.colorize(:light_blue)]
       end
       rows << :separator
     end
@@ -31,9 +31,9 @@ class Printer
 
   def statistic_data
     table = Terminal::Table.new title: I18n.t('print.statistic').colorize(:black).colorize(background: :white),
-                                style: { width: search_size } do |t|
-      t.add_row [I18n.t('print.total_quantity').colorize(:green), statistic[:total_quantity].to_s.colorize(:blue)]
-      t.add_row [I18n.t('print.requests_quantity').colorize(:green), statistic[:requests_quantity].to_s.colorize(:blue)]
+                                style: { width: search_size, border_bottom: false } do |t|
+      t.add_row [I18n.t('print.total').colorize(:green), statistic[:total_quantity].to_s.colorize(:light_blue)]
+      t.add_row [I18n.t('print.requests').colorize(:green), statistic[:requests_quantity].to_s.colorize(:light_blue)]
     end
     puts table
   end
