@@ -9,11 +9,6 @@ class Printer
     @statistic = statistic
   end
 
-  def search_size
-    size = result.length.positive? ? result.max_by { |car| car['description'] }['description'].length + 25 : 0
-    size < 45 ? MIN_LENGTH : size
-  end
-
   def call
     statistic_data
     rows = []
@@ -36,6 +31,11 @@ class Printer
       t.add_row [I18n.t('print.requests').colorize(:green), statistic[:requests_quantity].to_s.colorize(:light_blue)]
     end
     puts table
+  end
+
+  def search_size
+    size = result.length.positive? ? result.max_by { |car| car['description'] }['description'].length + 25 : 0
+    size < 45 ? MIN_LENGTH : size
   end
 
   attr_reader :result, :statistic
