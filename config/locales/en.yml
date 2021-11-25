@@ -1,0 +1,31 @@
+en:
+  input:
+    search_rules:
+      select: 'Please select search rules.'
+      choose: 'Please choose'
+      keys:
+        make: 'make'
+        model: 'model'
+        year_from: 'year from'
+        year_to: 'year to'
+        price_from: 'price from'
+        price_to: 'price to'
+    search_sort:
+      direction: 'Please choose sort direction(desc|asc):'
+      type: 'Please choose sort option (date_added|price):'
+  print:
+    result: 'Result'
+    statistic: 'Statistic'
+    total: 'Total Quantity:'
+    requests: 'Requests Quantity:'
+    keys:
+      id: 'ID'
+      make: 'Make'
+      model: 'Model'
+      year: 'Year'
+      odometer: 'Odometer'
+      price: 'Price'
+      description: 'Description'
+      date_added: 'Date added'
+  message_create_database: 'Database file created. Please complete it before the next launch of the program.'
+

@@ -12,21 +12,21 @@ class Input
   end
 
   def call
-    puts 'Please select search rules.'
+    puts I18n.t('input.search_rules.select')
     user_rules.each do |key, _value|
-      puts "Please choose #{key}: "
+      puts "#{I18n.t('input.search_rules.choose')} #{I18n.t("input.search_rules.keys.#{key}")}:"
       user_rules[key] = gets.chomp
     end
     user_rules
   end
 
   def sort_direction
-    puts 'Please choose sort direction(desc|asc):'
+    puts I18n.t('input.search_sort.direction')
     gets.chomp
   end
 
   def sort_option
-    puts 'Please choose sort option (date_added|price):'
+    puts I18n.t('input.search_sort.type')
     gets.chomp
   end
 

@@ -14,9 +14,9 @@ class App
       result_sorting = Sorter.new(result_searching, sort_direction, sort_option).call
       user_rules = DataUpdater.new(user_rules, result_searching).call('string')
       statistic = Statistic.new(user_rules, result_sorting).call
-      Printer.new(result_sorting).call(statistic)
+      Printer.new(result_sorting, statistic).call
     else
-      puts 'Database file created. Please complete it before the next launch of the program.'
+      puts I18n.t('message_create_database')
     end
   end
 end
