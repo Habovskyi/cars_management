@@ -27,5 +27,6 @@ en:
       price: 'Price'
       description: 'Description'
       date_added: 'Date added'
-  message_create_database: 'Database file created. Please complete it before the next launch of the program.'
+  message_create_database: 'File %{name_db} created.'
+  empty_database: 'The database file is empty, fill it before the next program run.'
 
