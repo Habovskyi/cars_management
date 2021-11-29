@@ -25,7 +25,7 @@ class Printer
   private
 
   def statistic_data
-    table = Terminal::Table.new title: I18n.t('print.statistic').colorize(:black).colorize(background: :white),
+    table = Terminal::Table.new title: I18n.t('print.statistic').colorize(:light_white),
                                 style: { width: search_size, border_bottom: false } do |t|
       t.add_row [I18n.t('print.total').colorize(:green), statistic[:total_quantity].to_s.colorize(:light_blue)]
       t.add_row [I18n.t('print.requests').colorize(:green), statistic[:requests_quantity].to_s.colorize(:light_blue)]

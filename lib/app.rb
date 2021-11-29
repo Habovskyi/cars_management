@@ -3,18 +3,53 @@
 require_relative 'autoload'
 # Class to call all the functionality
 class App
-  def self.call
-    database = Database.new.read
-    return puts I18n.t('empty_database') unless database
+  def initialize
+    @database = Database.new
+    @input = Input.new
+  end
 
-    user_rules = Input.new.call
-    update_user_rules = DataUpdater.new(user_rules.clone, database).call('number')
-    sort_option = Input.new.sort_option
-    sort_direction = Input.new.sort_direction
-    result_searching = Searcher.new(update_user_rules, database).call
-    result_sorting = Sorter.new(result_searching, sort_direction, sort_option).call
-    user_rules = DataUpdater.new(user_rules, result_searching).call('string')
-    statistic = Statistic.new(user_rules, result_sorting.length).call
-    Printer.new(result_sorting, statistic).call
+  def call
+    @data = read_database
+    return puts I18n.t('empty_database') unless @data
+
+    Printer.new(sorter, statistic).call
+  end
+
+  private
+
+  def read_database
+    @database.read
+  end
+
+  def input_user_rules
+    @user_rules = @input.call
+  end
+
+  def data_update_number
+    DataUpdater.new(input_user_rules.clone, @data).call('number')
+  end
+
+  def sort_option
+    @input.sort_option
+  end
+
+  def sort_direction
+    @input.sort_direction
+  end
+
+  def search
+    @search = Searcher.new(data_update_number, @data).call
+  end
+
+  def sorter
+    @sorter = Sorter.new(search, sort_direction, sort_option).call
+  end
+
+  def data_update_string
+    DataUpdater.new(@user_rules, @data).call('string')
+  end
+
+  def statistic
+    Statistic.new(data_update_string, @search.length).call
   end
 end

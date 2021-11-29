@@ -8,30 +8,43 @@ class DataUpdater
   end
 
   def call(option_validate)
-    option_validate == 'number' ? validate_number : validate_string
+    option_validate == 'number' ? update_number : update_string
   end
 
   private
 
-  def validate_number
-    change_max_value
-    user_rules[:year_to] = @max_year if user_rules[:year_to].to_i <= 0
-    user_rules[:price_to] = @max_price if user_rules[:price_to].to_i <= 0
-    user_rules.delete_if { |_key, value| value.to_s.empty? }
-    user_rules
+  def change_max_value
+    set_max_price if user_rules[:price_to].to_i <= 0
+    set_max_year if user_rules[:year_to].to_i <= 0
   end
 
-  def validate_string
+  def set_max_price
+    user_rules[:price_to] = database.max_by { |car| car['price'] }['price']
+  end
+
+  def set_max_year
+    user_rules[:year_to] = database.max_by { |car| car['year'] }['year']
+  end
+
+  def update_number
+    change_max_value
+    user_rules.delete_if { |_key, value| value.to_s.empty? }
+  end
+
+  def update_string
     database.each do |cars|
-      user_rules[:make] = cars['make'] if cars['make'].casecmp(user_rules[:make]).zero?
-      user_rules[:model] = cars['model'] if cars['model'].casecmp(user_rules[:model]).zero?
+      change_make(cars)
+      change_model(cars)
     end
     user_rules
   end
 
-  def change_max_value
-    @max_price = database.max_by { |car| car['price'] }['price']
-    @max_year = database.max_by { |car| car['year'] }['year']
+  def change_make(cars)
+    user_rules[:make] = cars['make'] if cars['make'].casecmp(user_rules[:make]).zero?
+  end
+
+  def change_model(cars)
+    user_rules[:model] = cars['model'] if cars['model'].casecmp(user_rules[:model]).zero?
   end
 
   attr_reader :user_rules, :database
