@@ -12,7 +12,6 @@ class Sorter
   end
 
   def call
-    puts "#{@data} ###"
     type == SORT_TYPE ? sorting_by_price : sorting_by_date_added
   end
 

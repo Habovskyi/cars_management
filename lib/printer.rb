@@ -18,7 +18,7 @@ class Printer
       end
       rows << :separator
     end
-    puts Terminal::Table.new(title: I18n.t('print.result').colorize(:black).colorize(background: :white), rows: rows,
+    puts Terminal::Table.new(title: I18n.t('print.result').colorize(:light_white), rows: rows,
                              style: { width: search_size, border_bottom: false })
   end
 
