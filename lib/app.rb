@@ -16,10 +16,6 @@ class App
 
   private
 
-  def read_database
-    database.read
-  end
-
   def input_user_rules
     @user_rules = input.call
   end
