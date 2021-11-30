@@ -2,11 +2,14 @@
 
 source 'https://rubygems.org'
 
-# gem "rails"
-group :development, :test do
-  gem 'colorize'
-  gem 'i18n'
-  gem 'pry', '~> 0.13.1'
-  gem 'rubocop', '~> 1.22'
-  gem 'terminal-table'
-end
+gem 'bundler-audit'
+gem 'bundler-leak'
+gem 'colorize'
+gem 'i18n'
+gem 'lefthook'
+gem 'pry', '~> 0.13.1'
+gem 'rubocop', '~> 1.22', require: false
+gem 'rubocop-md'
+gem 'rubocop-performance', require: false
+gem 'rubocop-rake'
+gem 'terminal-table'
