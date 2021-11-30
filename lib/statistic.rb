@@ -11,7 +11,7 @@ class Statistic
   end
 
   def call
-    load_statistic == false ? @db.write([@statistic]) : unique_record
+    load_statistic ? unique_record : @db.write([@statistic])
     @statistic[:statistic]
   end
 

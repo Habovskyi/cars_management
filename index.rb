@@ -2,4 +2,4 @@
 
 require_relative 'lib/app'
 
-App.call
+App.new.call
