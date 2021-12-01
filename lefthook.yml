@@ -11,10 +11,15 @@
 #       tags: backend security
 #       run: bundle audit
 #
-# pre-commit:
-#   parallel: true
-#   commands:
-#     eslint:
+ pre-commit:
+   parallel: true
+   commands:
+     rubocop:
+       run: bundle exec rubocop
+     bunlder-leak:
+       run: bundle leak check --update
+     bundler-audit:
+       run: bundle-audit check --update
 #       glob: "*.{js,ts}"
 #       run: yarn eslint {staged_files}
 #     rubocop:
