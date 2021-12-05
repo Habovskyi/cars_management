@@ -29,7 +29,7 @@ en:
   message_create_database: 'File %{name_db} created.'
   empty_database: 'The database file is empty, fill it before the next program run.'
   menu:
-    lang: 'Welcome! Please select an application language! Type en or uk'
+    lang: 'Welcome! Please select an application language: (en | uk)'
     name: 'Menu'
     search: 'Search a car'
     show: 'Show all cars'
