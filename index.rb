@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'lib/app'
+require_relative 'lib/autoload'
 
-App.new.call
+Lib::Console::Menu.new.welcome
