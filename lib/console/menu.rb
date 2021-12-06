@@ -10,7 +10,7 @@ module Lib
       end
 
       def welcome
-        language = @console.input('menu.lang')
+        language = @console.input('menu.lang').downcase
         language = 'en' if language != 'uk'
         I18n.default_locale = :"#{language}"
         show_menu
@@ -27,11 +27,11 @@ module Lib
       private
 
       def select_item
-        case @console.input('menu.choice').to_i
-        when 1 then search_car
-        when 2 then show_car
-        when 3 then @console.print_help
-        when 4 then @console.print_text('menu.end')
+        case @console.input('menu.choice')
+        when '1' then search_car
+        when '2' then show_car
+        when '3' then @console.print_help
+        when '4' then @console.print_text('menu.end')
                     exit
         else @console.print_text('menu.error')
         end
