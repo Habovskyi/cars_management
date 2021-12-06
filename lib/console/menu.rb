@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-# Class for logic menu
+# Class for menu and interface logic
 module Lib
   module Console
     class Menu
       def initialize
-        @console = Console.new
+        @console = Console.news
         @app = Lib::App.new
       end
 
@@ -32,7 +32,7 @@ module Lib
         when '2' then show_car
         when '3' then @console.print_help
         when '4' then @console.print_text('menu.end')
-                    exit
+                      exit
         else @console.print_text('menu.error')
         end
       end
