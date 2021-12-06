@@ -15,8 +15,8 @@ uk:
   print:
     result: 'Результат'
     statistic: 'Статистика'
-    total: 'Кількість знайдених:'
-    requests: 'Кількість запитів:'
+    total_quantity: 'Кількість знайдених:'
+    requests_quantity: 'Кількість запитів:'
     keys:
       id: 'Ідентифікатор'
       make: 'Виробник'
