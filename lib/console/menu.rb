@@ -5,7 +5,7 @@ module Lib
   module Console
     class Menu
       def initialize
-        @console = Console.news
+        @console = Console.new
         @app = Lib::App.new
       end
 
