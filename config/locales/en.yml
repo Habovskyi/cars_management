@@ -1,23 +1,22 @@
 en:
   input:
-    search_rules:
+    search:
       select: 'Please select search rules.'
-      choose: 'Please choose'
-      keys:
-        make: 'make'
-        model: 'model'
-        year_from: 'year from'
-        year_to: 'year to'
-        price_from: 'price from'
-        price_to: 'price to'
-    search_sort:
-      direction: 'Please choose sort direction(desc|asc):'
-      type: 'Please choose sort option (date_added|price):'
+      rules:
+        make: 'Please choose make:'
+        model: 'Please choose model:'
+        year_from: 'Please choose year from:'
+        year_to: 'Please choose year to:'
+        price_from: 'Please choose price from:'
+        price_to: 'Please choose price to:'
+    sort:
+        direction: 'Please choose sort direction(desc|asc):'
+        type: 'Please choose sort option (date_added|price):'
   print:
     result: 'Result'
     statistic: 'Statistic'
-    total: 'Total Quantity:'
-    requests: 'Requests Quantity:'
+    total_quantity: 'Total Quantity:'
+    requests_quantity: 'Requests Quantity:'
     keys:
       id: 'ID'
       make: 'Make'
@@ -29,4 +28,23 @@ en:
       date_added: 'Date added'
   message_create_database: 'File %{name_db} created.'
   empty_database: 'The database file is empty, fill it before the next program run.'
+  menu:
+    lang: 'Welcome! Please select an application language: (en | uk)'
+    name: 'Menu'
+    search: 'Search a car'
+    show: 'Show all cars'
+    help: 'Help'
+    exit: 'Exit'
+    choice: 'Please select(Enter a number)'
+    error: 'You have entered incorrect data (valid input 1, 2, 3 or 4). Please try again.'
+    end: 'The program completed successfully!'
+  help:
+    how_search: 'How to find car?'
+    how_show: 'How to view all available cars?'
+    how_exit: 'How to close the program?'
+    ans_search: "To search for a car, select menu item 1.\n Enter search criteria as needed."
+    ans_show: 'To view all available cars, select menu item 2.'
+    ans_exit: 'To exit the program, select menu item 4.'
+
+
 
