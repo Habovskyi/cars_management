@@ -8,11 +8,11 @@ module Lib
     FILEPATH = File.dirname(__FILE__)
     NAME_DB = 'db.yml'
 
-    def initialize(name_db = NAME_DB, access = 'r+')
+    def initialize(name_db = NAME_DB)
       @name_db = name_db
       @path = "#{FILEPATH}/../db/#{name_db}"
       create_file unless File.file?(path)
-      @db = File.open(path, access)
+      @db = File.open(path, 'r+')
     end
 
     def read

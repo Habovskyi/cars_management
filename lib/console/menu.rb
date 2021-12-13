@@ -39,7 +39,11 @@ module Lib
 
       def select_item
         number = @console.input('menu.choice')
-        (/^[1-#{@type_menu.size}]*$/).match?(number) ? send(@type_menu[number.to_i - 1]) : @console.print_text('menu.error')
+        if (/^[1-#{@type_menu.size}]*$/).match?(number)
+          send(@type_menu[number.to_i - 1])
+        else
+          @console.print_text('menu.error')
+        end
       end
 
       def search_car
@@ -53,11 +57,31 @@ module Lib
       end
 
       def sign_up
-        @email = @validator.email(@console.input('input.user.email'))
-        @email ? @user.unique_email(@email) : nil
-        @email ? @password = @validator.password(@console.input('input.user.password')) : nil
-        @email && @password ? @console.print_text(@user.call(@email, @password), :light_green, @email) : nil
+        return if email.nil?
+        return if password.nil?
+
+        @user.call(@email, @password)
+        @console.print_text('user.successful_registration', :light_green, @email)
         @user_status = true
+      end
+
+      def email
+        @email = @console.input('input.user.email')
+        unless @validator.email(@email)
+          @console.print_text('user.incorrect_email')
+          return
+        end
+
+        return @email unless @user.unique_email(@email)
+
+        @console.print_text('user.existing')
+      end
+
+      def password
+        @password = @console.input('input.user.password')
+        return @password if @validator.password(@password)
+
+        @console.print_text('user.incorrect_password')
       end
 
       def log_in

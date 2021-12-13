@@ -6,7 +6,7 @@ module Lib
       include BCrypt
 
       def initialize
-        @database = Database.new('user.yml', 'a+')
+        @database = Database.new('user.yml')
       end
 
       def read_user
@@ -19,7 +19,6 @@ module Lib
 
       def write_user(user_data)
         @database.write(user_data)
-        'user.successful_registration'
       end
 
       def call(email, password)
@@ -28,7 +27,9 @@ module Lib
       end
 
       def unique_email(email)
-        (@users.detect { |user| user[:email].eql? email } ? 'user.existing' : email) if @users
+        return unless read_user
+
+        @users.detect { |user| user[:email].eql? email }
       end
 
       def add_new_user
@@ -37,11 +38,9 @@ module Lib
       end
 
       def login(email, password)
-        return 'user.missing' unless read_user
+        return unless read_user
 
-        @users.detect do |user|
-          return true if user[:email] == email && user[:password] == password
-        end
+        @users.detect { |user| user[:email] == email && user[:password] == password }
       end
     end
   end

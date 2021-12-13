@@ -57,7 +57,7 @@ en:
     incorrect_email: 'Incorrect email!'
     incorrect_password: 'Incorrect password!'
     existing: 'A user with this email already exists.'
-    successful_registration: "Hello %{email}!"
+    successful_registration: "Hello, %{email}!"
     missing: 'User not found.'
 
 
