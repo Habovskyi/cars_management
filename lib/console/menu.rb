@@ -39,7 +39,7 @@ module Lib
 
       def select_item
         number = @console.input('menu.choice')
-        if (/^[1-#{@type_menu.size}]$/).match?(number)
+        if (1..@type_menu.size).cover?(number.to_i)
           send(@type_menu[number.to_i - 1])
         else
           @console.print_text('menu.error')
@@ -57,8 +57,8 @@ module Lib
       end
 
       def sign_up
-        return if email.nil?
-        return if password.nil?
+        return unless email
+        return unless password
 
         @user.call(@email, @password)
         @console.user_welcome(@email)
