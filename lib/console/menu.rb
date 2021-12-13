@@ -91,7 +91,7 @@ module Lib
           @console.user_welcome(@email)
           @logged = true
         else
-          @console.print_text('user.missing', :light_green)
+          @console.print_text('user.uncorected_data', :light_green)
         end
       end
 
