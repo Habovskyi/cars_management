@@ -4,14 +4,14 @@
 module Lib
   module Console
     class Menu
+      include Validators
       MENU = %i[search_car show_car help log_in sign_up close].freeze
       MENU_AUTHORIZED = %i[search_car show_car help logout close].freeze
 
       def initialize
         @console = Console.new
         @app = Lib::App.new
-        @user = User::User.new
-        @validator = Validator::Validator.new
+        @user = User.new
         @logged = false
       end
 
@@ -67,7 +67,7 @@ module Lib
 
       def email
         @email = @console.input('input.user.email')
-        unless @validator.email(@email)
+        unless email?(@email)
           @console.print_text('user.incorrect_email')
           return
         end
@@ -79,7 +79,7 @@ module Lib
 
       def password
         @password = @console.input('input.user.password')
-        return @password if @validator.password(@password)
+        return @password if password?(@password)
 
         @console.print_text('user.incorrect_password')
       end
