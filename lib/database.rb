@@ -20,9 +20,7 @@ module Lib
     end
 
     def write(data)
-      File.open(@path, 'w') do |f|
-        f.write(data.to_yaml)
-      end
+      File.write(@path, data.to_yaml)
     end
 
     private

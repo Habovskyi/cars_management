@@ -7,10 +7,6 @@ module Lib
       VALID_PASSWORD = /^(?=.*[a-z])(?=.*[A-Z])(?=(?:.*?[@$!%*?&]){2,})[A-Za-z\d@$!%*?&]{8,20}$/
       VALID_EMAIL = /^[a-z\d.]{5,}+@[a-z\d.]+\.[a-z]+/
 
-      def initialize
-        @console = Console::Console.new
-      end
-
       def password(password)
         VALID_PASSWORD.match?(password)
       end

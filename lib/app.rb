@@ -5,10 +5,6 @@ module Lib
   class App
     def initialize
       @data = Database.new.read
-      call
-    end
-
-    def call
       abort I18n.t('empty_database') unless @data
     end
 
