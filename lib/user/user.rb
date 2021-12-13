@@ -25,7 +25,7 @@ module Lib
       read_user ? add_new_user : write_user([@credential])
     end
 
-    def unique_email(email)
+    def unique_email?(email)
       return unless read_user
 
       @users.detect { |user| user[:email].eql? email }
@@ -43,4 +43,3 @@ module Lib
     end
   end
 end
-

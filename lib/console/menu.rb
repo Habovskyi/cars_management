@@ -72,7 +72,7 @@ module Lib
           return
         end
 
-        return @email unless @user.unique_email(@email)
+        return @email unless @user.unique_email?(@email)
 
         @console.print_text('user.existing')
       end
