@@ -39,7 +39,7 @@ module Lib
 
       def select_item
         number = @console.input('menu.choice')
-        if (1..@type_menu.size).cover?(number.to_i)
+        if (/^[1-#{@type_menu.size}]$/).match(number)
           send(@type_menu[number.to_i - 1])
         else
           @console.print_text('menu.error')
