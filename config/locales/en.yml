@@ -12,6 +12,10 @@ en:
     sort:
         direction: 'Please choose sort direction(desc|asc):'
         type: 'Please choose sort option (date_added|price):'
+    user:
+        email: 'Please input email:'
+        password: 'Please input password:'
+
   print:
     result: 'Result'
     statistic: 'Statistic'
@@ -31,12 +35,16 @@ en:
   menu:
     lang: 'Welcome! Please select an application language: (en | uk)'
     name: 'Menu'
-    search: 'Search a car'
-    show: 'Show all cars'
+    search_car: 'Search a car'
+    show_car: 'Show all cars'
     help: 'Help'
-    exit: 'Exit'
+    log_in: 'Log in'
+    sign_up: 'Sign up'
+    logout: 'Logout'
+    close: 'Exit'
     choice: 'Please select(Enter a number)'
     error: 'You have entered incorrect data (valid input 1, 2, 3 or 4). Please try again.'
+    go_out: 'See you later!'
     end: 'The program completed successfully!'
   help:
     how_search: 'How to find car?'
@@ -45,6 +53,12 @@ en:
     ans_search: "To search for a car, select menu item 1.\n Enter search criteria as needed."
     ans_show: 'To view all available cars, select menu item 2.'
     ans_exit: 'To exit the program, select menu item 4.'
+  user:
+    incorrect_email: 'Incorrect email!'
+    incorrect_password: 'Incorrect password!'
+    existing: 'A user with this email already exists.'
+    successful_registration: "Hello %{email}!"
+    missing: 'User not found.'
 
 
 

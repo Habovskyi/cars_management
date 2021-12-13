@@ -17,7 +17,7 @@ module Lib
 
       def input_user_rules
         print_text('input.search.select')
-        @user_rules.each { |key, _| @user_rules[key] = input("input.search.rules.#{key}") }
+        @user_rules.each { |key, _| @user_rules[key] = input("input.search.rules.#{key}").capitalize }
         @user_rules
       end
 
@@ -31,8 +31,8 @@ module Lib
         gets.chomp
       end
 
-      def print_text(text, color = :light_white)
-        puts I18n.t(text.to_s).colorize(:"#{color}")
+      def print_text(text, color = :light_white, params = '')
+        puts I18n.t(text.to_s, email: params).colorize(:"#{color}")
       end
 
       def print_statistic(search_result, statistic)
@@ -54,10 +54,8 @@ module Lib
         puts table(title: title('menu.help', 'light_green'), rows: table_help(help))
       end
 
-      def print_menu
-        options = { '1' => 'search', '2' => 'show', '3' => 'help', '4' => 'exit' }
-
-        puts table(title: title('menu.name', 'blue'), rows: table_menu(options),
+      def print_menu(menu)
+        puts table(title: title('menu.name', 'blue'), rows: table_menu(menu),
                    style: { border_bottom: true })
       end
 
@@ -70,7 +68,7 @@ module Lib
       end
 
       def table_menu(menu)
-        menu.map { |key, value| [key.colorize(:green), title("menu.#{value}")] }
+        menu.map.with_index { |value, index| [(index + 1).to_s.colorize(:green), title("menu.#{value}")] }
       end
 
       def table_help(help)
