@@ -16,13 +16,13 @@ module Lib
       BCrypt::Password.create(password)
     end
 
-    def write_user(user_data)
+    def write(user_data)
       @database.write(user_data)
     end
 
     def call(email, password)
       @credential = { email: email, password: crypt_password(password) }
-      read_user ? add_new_user : write_user([@credential])
+      read_user ? add_new_user : write([@credential])
     end
 
     def unique_email?(email)
@@ -33,7 +33,7 @@ module Lib
 
     def add_new_user
       @users << @credential
-      write_user(@users)
+      write(@users)
     end
 
     def login(email, password)
