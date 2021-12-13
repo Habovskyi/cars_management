@@ -12,7 +12,7 @@ module Lib
         @app = Lib::App.new
         @user = User::User.new
         @validator = Validator::Validator.new
-        @user_status = false
+        @logged = false
       end
 
       def welcome
@@ -23,7 +23,7 @@ module Lib
       end
 
       def print_options
-        @type_menu = @user_status ? MENU_AUTHORIZED : MENU
+        @type_menu = @logged ? MENU_AUTHORIZED : MENU
         @console.print_menu(@type_menu)
       end
 
@@ -61,8 +61,8 @@ module Lib
         return if password.nil?
 
         @user.call(@email, @password)
-        @console.print_text('user.successful_registration', :light_green, @email)
-        @user_status = true
+        @console.user_welcome(@email)
+        @logged = true
       end
 
       def email
@@ -88,8 +88,8 @@ module Lib
         email = @console.input('input.user.email')
         password = @console.input('input.user.password')
         if @user.login(email, password)
-          @console.print_text('user.successful_registration', :light_green, email)
-          @user_status = true
+          @console.user_welcome(@email)
+          @logged = true
         else
           @console.print_text('user.missing', :light_green)
         end
@@ -100,7 +100,7 @@ module Lib
       end
 
       def logout
-        @user_status = false
+        @logged = false
         @console.print_text('menu.go_out', :light_green)
       end
 

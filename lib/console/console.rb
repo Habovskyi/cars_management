@@ -31,8 +31,12 @@ module Lib
         gets.chomp
       end
 
-      def print_text(text, color = :light_white, params = '')
-        puts I18n.t(text.to_s, email: params).colorize(:"#{color}")
+      def print_text(text, color = :light_white)
+        puts I18n.t(text.to_s).colorize(color.to_sym)
+      end
+
+      def user_welcome(login)
+        puts I18n.t('user.login_welcome', email: login).colorize(:light_green)
       end
 
       def print_statistic(search_result, statistic)
