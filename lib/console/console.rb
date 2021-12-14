@@ -17,7 +17,8 @@ module Lib
 
       def input_user_rules
         print_text('input.search.select')
-        @user_rules.keys.map { |key| @user_rules[key] = input("input.search.rules.#{key}").capitalize }
+        @user_rules.each { |key, _| @user_rules[key] = input("input.search.rules.#{key}") }
+        @user_rules
       end
 
       def input_sort_rules
