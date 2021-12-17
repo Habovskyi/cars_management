@@ -32,7 +32,11 @@ module Lib
       end
 
       def print_text(text, color = :light_white)
-        puts I18n.t(text.to_s).colorize(:"#{color}")
+        puts I18n.t(text.to_s).colorize(color.to_sym)
+      end
+
+      def user_welcome(login)
+        puts I18n.t('user.login_welcome', email: login).colorize(:light_green)
       end
 
       def print_statistic(search_result, statistic)
@@ -54,10 +58,8 @@ module Lib
         puts table(title: title('menu.help', 'light_green'), rows: table_help(help))
       end
 
-      def print_menu
-        options = { '1' => 'search', '2' => 'show', '3' => 'help', '4' => 'exit' }
-
-        puts table(title: title('menu.name', 'blue'), rows: table_menu(options),
+      def print_menu(menu)
+        puts table(title: title('menu.name', 'blue'), rows: table_menu(menu),
                    style: { border_bottom: true })
       end
 
@@ -70,7 +72,7 @@ module Lib
       end
 
       def table_menu(menu)
-        menu.map { |key, value| [key.colorize(:green), title("menu.#{value}")] }
+        menu.map.with_index { |value, index| [(index + 1).to_s.colorize(:green), title("menu.#{value}")] }
       end
 
       def table_help(help)

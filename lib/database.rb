@@ -20,8 +20,7 @@ module Lib
     end
 
     def write(data)
-      db.write(data.to_yaml)
-      db.close
+      File.write(@path, data.to_yaml)
     end
 
     private
