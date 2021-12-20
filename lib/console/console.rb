@@ -49,8 +49,13 @@ module Lib
       end
 
       def print_result(search_result)
-        result = search_result.flat_map { |car| table_data(car) << :separator }
+        result = search_result.flat_map { |car| table_car_data(car) << :separator }
         puts table(title: title('print.result', 'light_white'), rows: result, style: { border_bottom: false })
+      end
+
+      def print_searches(user_searches)
+        result = user_searches.flat_map { |searches| table_searches_data(searches) << :separator }
+        puts table(title: title('print.searches', 'light_white'), rows: result, style: { border_bottom: false })
       end
 
       def print_help
@@ -67,8 +72,12 @@ module Lib
         Terminal::Table.new(title: title, rows: rows, style: style)
       end
 
-      def table_data(data)
+      def table_car_data(data)
         data.map { |key, value| [title("print.keys.#{key}", 'light_blue'), value.to_s] }
+      end
+
+      def table_searches_data(data)
+        data.map { |key, value| [title("user_searches.keys.#{key}", 'light_blue'), value.to_s] }
       end
 
       def table_menu(menu)

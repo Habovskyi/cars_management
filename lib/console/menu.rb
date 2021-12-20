@@ -6,7 +6,7 @@ module Lib
     class Menu
       include Validators
       MENU = %i[search_car show_car help log_in sign_up close].freeze
-      MENU_AUTHORIZED = %i[search_car show_car help logout close].freeze
+      MENU_AUTHORIZED = %i[search_car show_car my_searches help logout close].freeze
 
       def initialize
         @console = Console.new
@@ -16,7 +16,7 @@ module Lib
       end
 
       def welcome
-        language = @console.input('menu.lang')
+        language = @console.input('menu.lang').downcase
         language = 'en' if language != 'uk'
         I18n.default_locale = :"#{language}"
         show_menu
@@ -47,9 +47,13 @@ module Lib
       end
 
       def search_car
-        @app.search_rules(@console.input_user_rules)
+        @user_rules = @console.input_user_rules
+        @app.search_rules(@user_rules)
         @app.sort_rules(@console.input_sort_rules)
         @console.print_statistic(@app.search, @app.statistic)
+        return unless @logged
+
+        UserSearches.write(@email, @user_rules)
       end
 
       def show_car
@@ -85,9 +89,9 @@ module Lib
       end
 
       def log_in
-        email = @console.input('input.user.email')
+        @email = @console.input('input.user.email')
         password = @console.input('input.user.password')
-        if @user.login(email, password)
+        if @user.login(@email, password)
           @console.user_welcome(@email)
           @logged = true
         else
@@ -97,6 +101,15 @@ module Lib
 
       def help
         @console.print_help
+      end
+
+      def my_searches
+        searches = UserSearches.exist_user?(@email)
+        if searches
+          @console.print_searches(searches[:user_rules])
+        else
+          @console.print_text('user_searches.no_searches')
+        end
       end
 
       def logout
