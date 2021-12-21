@@ -64,7 +64,7 @@ module Lib
       end
 
       def print_menu(menu)
-        puts table(title: title('menu.name', 'blue'), rows: table_menu(menu),
+        puts table(title: title('menu.name', 'light_white'), rows: table_menu(menu),
                    style: { border_bottom: true })
       end
 
@@ -73,11 +73,11 @@ module Lib
       end
 
       def table_car_data(data)
-        data.map { |key, value| [title("print.keys.#{key}", 'light_blue'), value.to_s] }
+        data.map { |key, value| [title("print.keys.#{key}", 'light_green'), value.to_s] }
       end
 
       def table_searches_data(data)
-        data.map { |key, value| [title("user_searches.keys.#{key}", 'light_blue'), value.to_s] }
+        data.map { |key, value| [title("user_searches.keys.#{key}", 'light_green'), value.to_s] }
       end
 
       def table_menu(menu)
