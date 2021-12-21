@@ -59,7 +59,9 @@ module Lib
       end
 
       def print_help
-        help = { 'how_search' => 'ans_search', 'how_show' => 'ans_show', 'how_exit' => 'ans_exit' }
+        help = { 'how_search' => 'ans_search', 'how_show' => 'ans_show', 'how_login' => 'ans_login',
+                 'how_register' => 'ans_register', 'how_logout' => 'ans_logout', 'how_my_searches' => 'ans_my_searches',
+                 'how_exit' => 'ans_exit' }
         puts table(title: title('menu.help', 'light_green'), rows: table_help(help))
       end
 
