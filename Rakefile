@@ -25,7 +25,7 @@ namespace :car_database do
               'make' => FFaker::Vehicle.make,
               'model' => FFaker::Vehicle.model,
               'year' => FFaker::Vehicle.year.to_i,
-              'odometer' => FFaker::Random.rand(0..500_000).to_i,
+              'odometer' => FFaker::Number.rand(0..500_000).to_i,
               'price' => FFaker::Number.rand(10..1000) * 100.to_i,
               'description' => FFaker::Lorem.sentence,
               'date_added' => FFaker::Time.date.strftime('%d/%m/%y') }
