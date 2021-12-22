@@ -49,17 +49,24 @@ module Lib
       end
 
       def print_result(search_result)
-        result = search_result.flat_map { |car| table_data(car) << :separator }
+        result = search_result.flat_map { |car| table_car_data(car) << :separator }
         puts table(title: title('print.result', 'light_white'), rows: result, style: { border_bottom: false })
       end
 
+      def print_searches(user_searches)
+        result = user_searches.flat_map { |searches| table_searches_data(searches) << :separator }
+        puts table(title: title('print.searches', 'light_white'), rows: result, style: { border_bottom: false })
+      end
+
       def print_help
-        help = { 'how_search' => 'ans_search', 'how_show' => 'ans_show', 'how_exit' => 'ans_exit' }
+        help = { 'how_search' => 'ans_search', 'how_show' => 'ans_show', 'how_login' => 'ans_login',
+                 'how_register' => 'ans_register', 'how_logout' => 'ans_logout', 'how_my_searches' => 'ans_my_searches',
+                 'how_exit' => 'ans_exit' }
         puts table(title: title('menu.help', 'light_green'), rows: table_help(help))
       end
 
       def print_menu(menu)
-        puts table(title: title('menu.name', 'blue'), rows: table_menu(menu),
+        puts table(title: title('menu.name', 'light_white'), rows: table_menu(menu),
                    style: { border_bottom: true })
       end
 
@@ -67,8 +74,12 @@ module Lib
         Terminal::Table.new(title: title, rows: rows, style: style)
       end
 
-      def table_data(data)
-        data.map { |key, value| [title("print.keys.#{key}", 'light_blue'), value.to_s] }
+      def table_car_data(data)
+        data.map { |key, value| [title("print.keys.#{key}", 'light_green'), value.to_s] }
+      end
+
+      def table_searches_data(data)
+        data.map { |key, value| [title("user_searches.keys.#{key}", 'light_green'), value.to_s] }
       end
 
       def table_menu(menu)

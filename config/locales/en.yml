@@ -17,6 +17,7 @@ en:
         password: 'Please input password:'
   print:
     result: 'Result'
+    searches: 'My Searches'
     statistic: 'Statistic'
     total_quantity: 'Total Quantity:'
     requests_quantity: 'Requests Quantity:'
@@ -39,6 +40,7 @@ en:
     help: 'Help'
     log_in: 'Log in'
     sign_up: 'Sign up'
+    my_searches: 'My Searches'
     logout: 'Logout'
     close: 'Exit'
     choice: 'Please select(Enter a number)'
@@ -49,9 +51,17 @@ en:
     how_search: 'How to find car?'
     how_show: 'How to view all available cars?'
     how_exit: 'How to close the program?'
-    ans_search: "To search for a car, select menu item 1.\n Enter search criteria as needed."
-    ans_show: 'To view all available cars, select menu item 2.'
-    ans_exit: 'To exit the program, select menu item 4.'
+    how_login: 'How to login?'
+    how_register: 'How to register?'
+    how_logout: 'How to logout?'
+    how_my_searches: 'How to see my searches?'
+    ans_search: "To search for a car, select menu item 'Search car'.\nEnter search criteria as needed."
+    ans_show: "To view all available cars, select menu 'Show car'."
+    ans_exit: "To exit the program, select menu item 'Exit'."
+    ans_login: "To login, you need to select the menu item 'Login'.\nEnter the registered e-mail and password"
+    ans_register: "To register, select the menu item 'Sign up'.\nEnter your email and password."
+    ans_logout: "To log out of the account, select the item of the authorized menu 'Log out'."
+    ans_my_searches: "To view your search history, select the 'My Searches' menu item"
   user:
     incorrect_email: 'Incorrect email. The format of the e-mail should be followed, also the @ character must be preceded by at least 5 characters!'
     incorrect_password: 'Incorrect password. The password must contain two special characters, one uppercase letter. The number of characters is at least 8, the maximum length is 20!'
@@ -59,6 +69,17 @@ en:
     login_welcome: "Hello, %{email}!"
     missing: 'User not found.'
     uncorected_data: 'The password or email address was entered incorrectly!'
+  user_searches:
+    no_searches: 'User did not perform any searches!'
+    keys:
+      make: 'Make'
+      model: 'Model'
+      year_from: 'Year from'
+      year_to: 'Year to'
+      price_from: 'Price from'
+      price_to: 'Price to'
+      search_date: 'Date search'
+
 
 
 
