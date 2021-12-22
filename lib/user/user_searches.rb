@@ -18,6 +18,7 @@ module Lib
         else
           @user_searches << searches
         end
+
         @database.write(@user_searches)
       end
 
