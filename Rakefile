@@ -5,7 +5,10 @@ require 'yaml'
 require 'i18n'
 require 'colorize'
 require_relative 'lib/database'
+require_relative 'config/i18n_config'
 require_relative 'lib/console/console'
+
+I18n.default_locale = :en
 
 database = Lib::Database.new('db.yml')
 
@@ -13,7 +16,7 @@ namespace :car_database do
   desc 'Clearing the car database'
   task :clear do
     database.write(nil)
-    puts 'The database has been cleared.'.colorize(:light_green)
+    puts I18n.t('rake.clear').colorize(:light_green)
   end
 
   desc 'Adding cars to the database(quantity - number of cars that will be added)'
@@ -32,6 +35,6 @@ namespace :car_database do
       cars << car
     end
     database.write(cars)
-    puts "#{quantity} cars were added to the database.".colorize(:light_green)
+    puts "#{quantity} #{I18n.t('rake.add_car')}".colorize(:light_green)
   end
 end

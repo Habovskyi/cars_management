@@ -79,6 +79,9 @@ en:
       price_from: 'Price from'
       price_to: 'Price to'
       search_date: 'Date search'
+  rake:
+    clear: 'The database has been cleared.'
+    add_car: 'cars were added to the database.'
 
 
 
