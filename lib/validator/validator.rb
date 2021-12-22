@@ -3,7 +3,7 @@
 # Class for validating data
 module Lib
   module Validators
-    VALID_PASSWORD = /^(?=.*?[A-Z])(?=(?:.*?[#@$!%*?&]){2,}).{8,20}$/
+    VALID_PASSWORD = /^(?=.*?[A-Z])(?=(?:.*?[()=\-\/\\+.,|#@$!%*?&]){2,}).{8,20}$/
     VALID_EMAIL = /^[a-z\d.]{5,}+@[a-z\d.]+\.[a-z]+/
 
     def password?(password)
