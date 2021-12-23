@@ -34,6 +34,7 @@ namespace :car_database do
               'date_added' => FFaker::Time.date.strftime('%d/%m/%y') }
       cars << car
     end
+
     database.write(cars)
     puts "#{quantity} #{I18n.t('rake.add_car')}".colorize(:light_green)
   end
