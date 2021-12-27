@@ -4,15 +4,16 @@
 module Lib
   module Console
     class Menu
-      include Validators
+      include Validator
       MENU = %i[search_car show_car help log_in sign_up close].freeze
       MENU_AUTHORIZED = %i[search_car show_car my_searches help logout close].freeze
+      MENU_ADMIN = %i[create update delete logout].freeze
 
       def initialize
         @console = Console.new
         @app = Lib::App.new
         @user = User.new
-        @logged = false
+        @admin = Administrator.new
       end
 
       def welcome
@@ -23,7 +24,8 @@ module Lib
       end
 
       def print_options
-        @type_menu = @logged ? MENU_AUTHORIZED : MENU
+        @type_menu = @user.logged ? MENU_AUTHORIZED : MENU
+        @type_menu = MENU_ADMIN if @user.admin
         @console.print_menu(@type_menu)
       end
 
@@ -47,16 +49,20 @@ module Lib
       end
 
       def search_car
+        return @console.print_text('empty_database') unless @app.data
+
         @user_rules = @console.input_user_rules
         @app.search_rules(@user_rules)
         @app.sort_rules(@console.input_sort_rules)
         @console.print_statistic(@app.search, @app.statistic)
-        return unless @logged
+        return unless @user.logged
 
         UserSearches.write(@email, @user_rules)
       end
 
       def show_car
+        return @console.print_text('empty_database') unless @app.data
+
         @console.print_result(@app.show_car)
       end
 
@@ -65,16 +71,12 @@ module Lib
         return unless password
 
         @user.call(@email, @password)
-        @console.user_welcome(@email)
-        @logged = true
+        @console.text_with_params('user.login_welcome', @email)
       end
 
       def email
         @email = @console.input('input.user.email')
-        unless email?(@email)
-          @console.print_text('user.incorrect_email')
-          return
-        end
+        return @console.print_text('user.incorrect_email') unless email?(@email)
 
         return @email unless @user.unique_email?(@email)
 
@@ -92,10 +94,9 @@ module Lib
         @email = @console.input('input.user.email')
         password = @console.input('input.user.password')
         if @user.login(@email, password)
-          @console.user_welcome(@email)
-          @logged = true
+          @console.text_with_params('user.login_welcome', @email)
         else
-          @console.print_text('user.uncorected_data', :light_green)
+          @console.print_text('user.uncorected_data', :light_green) unless @user.admin
         end
       end
 
@@ -105,15 +106,23 @@ module Lib
 
       def my_searches
         searches = UserSearches.exist_user?(@email)
-        if searches
-          @console.print_searches(searches[:user_rules])
-        else
-          @console.print_text('user_searches.no_searches')
-        end
+        searches ? @console.print_searches(searches[:user_rules]) : @console.print_text('user_searches.no_searches')
+      end
+
+      def create
+        @admin.create_advertisement
+      end
+
+      def update
+        @admin.update_advertisement
+      end
+
+      def delete
+        @admin.delete_advertisement
       end
 
       def logout
-        @logged = false
+        @user.logout
         @console.print_text('menu.go_out', :light_green)
       end
 

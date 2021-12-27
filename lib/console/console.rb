@@ -11,6 +11,7 @@ module Lib
                         year_to: '',
                         price_from: '',
                         price_to: '' }
+
         @sort_rules = { type: '',
                         direction: '' }
       end
@@ -35,8 +36,8 @@ module Lib
         puts I18n.t(text.to_s).colorize(color.to_sym)
       end
 
-      def user_welcome(login)
-        puts I18n.t('user.login_welcome', email: login).colorize(:light_green)
+      def text_with_params(text, param)
+        puts I18n.t(text, param: param).colorize(:light_green)
       end
 
       def print_statistic(search_result, statistic)
