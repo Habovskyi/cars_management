@@ -7,6 +7,11 @@
 4. Run in terminal `bundle install` for install dependencies
 5. Run the project for execution in terminal `irb index.rb`
 
+### Admin Panel
+`login`: admin
+
+`password`: admin
+
 ### Rake command
 `rake -T` - a command to view rake tasks and describe them.
 The program contains two rake commands:

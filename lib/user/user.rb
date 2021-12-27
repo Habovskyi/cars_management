@@ -43,8 +43,7 @@ module Lib
       return unless read_user
       return if admin?(email, password)
 
-      @users.detect { |user| user[:email] == email && user[:password] == password }
-      @logged = 'authorized'
+      @logged = 'authorized' if @users.detect { |user| user[:email] == email && user[:password] == password }
     end
 
     def admin?(email, password)
