@@ -46,6 +46,7 @@ module Lib
 
     def find_advertisement
       return unless input_id
+
       @current_advertisement = @advertisement.detect { |advertisement| advertisement['id'] == @id.to_i }
       @console.text_with_params('admin.errors.id', @id) unless @current_advertisement
       @current_advertisement
