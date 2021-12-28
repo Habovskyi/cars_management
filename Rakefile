@@ -24,7 +24,8 @@ namespace :car_database do
     quantity = args.quantity || 1
     cars = database.read || []
     quantity.to_i.times do
-      car = { 'id' => FFaker::Guid.guid.downcase,
+      current_id = cars.empty? ? 1 : cars.last['id'].to_i + 1
+      car = { 'id' => current_id,
               'make' => FFaker::Vehicle.make,
               'model' => FFaker::Vehicle.model,
               'year' => FFaker::Vehicle.year.to_i,
