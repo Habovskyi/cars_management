@@ -27,8 +27,7 @@ module Lib
     end
 
     def update_advertisement
-      find_advertisement
-      return unless @current_advertisement
+      return unless find_advertisement
 
       ADVERTISEMENT_PARAMS.each do |key|
         return @console.print_text("admin.errors.#{key}") unless (@current_advertisement[key] = public_send(key))
@@ -38,8 +37,7 @@ module Lib
     end
 
     def delete_advertisement
-      find_advertisement
-      return unless @current_advertisement
+      return unless find_advertisement
 
       @advertisement.delete(@current_advertisement)
       @database.write(@advertisement)
@@ -47,11 +45,17 @@ module Lib
     end
 
     def find_advertisement
+      return unless input_id
+      @current_advertisement = @advertisement.detect { |advertisement| advertisement['id'] == @id.to_i }
+      @console.text_with_params('admin.errors.id', @id) unless @current_advertisement
+      @current_advertisement
+    end
+
+    def input_id
       @id = @console.input('admin.car_params.id')
       return @console.print_text('admin.errors.id_no_numeric') unless int?(@id)
 
-      @current_advertisement = @advertisement.detect { |advertisement| advertisement['id'] == @id.to_i }
-      @console.text_with_params('admin.errors.id', @id) unless @current_advertisement
+      @id
     end
 
     def id

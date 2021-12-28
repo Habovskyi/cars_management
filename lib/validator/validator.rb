@@ -30,8 +30,8 @@ module Lib
       /^([0-9a-zA-Z\s\W]){0,5000}$/.match?(description)
     end
 
-    def int?(obj)
-      obj.to_s == obj.to_i.to_s && obj.to_i.positive?
+    def int?(id)
+      /^[1-9]+[0-9]*$/.match?(id)
     end
   end
 end
