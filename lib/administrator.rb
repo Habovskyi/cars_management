@@ -22,7 +22,9 @@ module Lib
         return @console.print_text("admin.errors.#{key}") unless (car[key] = public_send(key))
       end
       @advertisement << car
+
       @database.write(@advertisement)
+
       @console.text_with_params('admin.messages.create', @current_id.to_s)
     end
 
@@ -33,6 +35,7 @@ module Lib
         return @console.print_text("admin.errors.#{key}") unless (@current_advertisement[key] = public_send(key))
       end
       @database.write(@advertisement)
+
       @console.text_with_params('admin.messages.update', @id.to_s)
     end
 
@@ -40,7 +43,9 @@ module Lib
       return unless find_advertisement
 
       @advertisement.delete(@current_advertisement)
+
       @database.write(@advertisement)
+
       @console.text_with_params('admin.messages.delete', @id.to_s)
     end
 
