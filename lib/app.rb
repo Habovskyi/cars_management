@@ -3,9 +3,10 @@
 # Class to call all the functionality
 module Lib
   class App
+    attr_reader :data
+
     def initialize
       @data = Database.new.read
-      abort I18n.t('empty_database') unless @data
     end
 
     def show_car

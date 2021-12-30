@@ -31,7 +31,7 @@ en:
       description: 'Description'
       date_added: 'Date added'
   message_create_database: 'File %{name_db} created.'
-  empty_database: 'The database file is empty, fill it before the next program run.'
+  empty_database: 'The database file is empty, fill it using the admin or Rake command before the next program run.'
   menu:
     lang: 'Welcome! Please select an application language: (en | uk)'
     name: 'Menu'
@@ -41,6 +41,9 @@ en:
     log_in: 'Log in'
     sign_up: 'Sign up'
     my_searches: 'My Searches'
+    create: 'Create an Advertisement'
+    update: 'Update an Advertisement'
+    delete: 'Delete an Advertisement'
     logout: 'Logout'
     close: 'Exit'
     choice: 'Please select(Enter a number)'
@@ -66,7 +69,7 @@ en:
     incorrect_email: 'Incorrect email. The format of the e-mail should be followed, also the @ character must be preceded by at least 5 characters!'
     incorrect_password: 'Incorrect password. The password must contain two special characters, one uppercase letter. The number of characters is at least 8, the maximum length is 20!'
     existing: 'A user with this email already exists.'
-    login_welcome: "Hello, %{email}!"
+    login_welcome: "Hello, %{param}!"
     missing: 'User not found.'
     uncorected_data: 'The password or email address was entered incorrectly!'
   user_searches:
@@ -79,6 +82,28 @@ en:
       price_from: 'Price from'
       price_to: 'Price to'
       search_date: 'Date search'
+  admin:
+    car_params:
+      id: 'Input id'
+      make: 'Input make'
+      model: 'Input model'
+      year: 'Input year'
+      odometer: 'Input odometer'
+      price: 'Input price'
+      description: 'Input description'
+    messages:
+      create: "You have successfully created the car with id %{param}!"
+      update: "You have successfully updated the car with id %{param}!"
+      delete: "You have successfully deleted the car with id %{param}!"
+    errors:
+      make: 'Make should be have at least 3 symbols, at most 50 symbols and consists only of English letters.'
+      model: 'Model should be have at least 3 symbols, at most 50 symbols and consists only of English letters.'
+      year: 'Year should be an integer, greater than 1900 year and not greater than current year.'
+      odometer: 'Odometer should be an integer and positive.'
+      price: 'Price should be an integer and positive.'
+      description: 'Description should be a string and have no more than 5000 symbols.'
+      id: "Advertisement with id %{param} don't exist!"
+      id_no_numeric: 'ID must be an integer, starting from 1!'
   rake:
     clear: 'The database has been cleared.'
     add_car: 'cars were added to the database.'

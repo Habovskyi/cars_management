@@ -6,7 +6,7 @@ module Lib
     class << self
       def read
         @database = Database.new('user_searches.yml')
-        @database.read || []
+        @user_searches = @database.read || []
       end
 
       def write(email, user_rules)
@@ -23,7 +23,8 @@ module Lib
       end
 
       def exist_user?(email)
-        @current_searches = @user_searches.detect { |searches| searches[:email].eql? email } if (@user_searches = read)
+        read
+        @current_searches = @user_searches.detect { |searches| searches[:email].eql? email } if @user_searches
       end
 
       def search_date(rules)
