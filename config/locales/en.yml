@@ -56,6 +56,7 @@ en:
     end: 'The program completed successfully!'
   help:
     how_search: 'How to find car?'
+    how_fast_search: 'How to do a fast search?'
     how_show: 'How to view all available cars?'
     how_exit: 'How to close the program?'
     how_login: 'How to login?'
@@ -63,6 +64,7 @@ en:
     how_logout: 'How to logout?'
     how_my_searches: 'How to see my searches?'
     ans_search: "To search for a car, select menu item 'Search car'.\nEnter search criteria as needed."
+    ans_fast_search: "In the menu, select 'Fast search'."
     ans_show: "To view all available cars, select menu 'Show car'."
     ans_exit: "To exit the program, select menu item 'Exit'."
     ans_login: "To login, you need to select the menu item 'Login'.\nEnter the registered e-mail and password"
