@@ -48,5 +48,11 @@ module Lib
     def menu?(type_menu, number)
       (/^[1-#{type_menu.size}]$/).match?(number)
     end
+
+    def unique_email?(email, database)
+      return unless database
+
+      database.detect { |user| user[:email].eql? email }
+    end
   end
 end

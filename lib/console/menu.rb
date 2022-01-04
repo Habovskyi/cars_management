@@ -14,6 +14,7 @@ module Lib
         @app = Lib::App.new
         @user = User.new
         @admin = Administrator.new
+        @authentication = Authentication.new
       end
 
       def welcome
@@ -24,8 +25,8 @@ module Lib
       end
 
       def print_options
-        @type_menu = @user.logged ? MENU_AUTHORIZED : MENU
-        @type_menu = MENU_ADMIN if @user.admin
+        @type_menu = @authentication.logged ? MENU_AUTHORIZED : MENU
+        @type_menu = MENU_ADMIN if @authentication.admin
         @console.print_menu(@type_menu)
       end
 
@@ -51,13 +52,16 @@ module Lib
         @app.search_rules(@user_rules)
         @app.sort_rules(@console.input_sort_rules)
         @console.print_statistic(@app.sorter, @app.statistic)
-        return unless @user.logged
+        return unless @authentication.logged
 
         UserSearches.write(@email, @user_rules)
       end
 
       def fast_search
-        Operations::FastSearch.new.call
+        search = Operations::FastSearch.new.call
+        return unless @authentication.logged && search
+
+        UserSearches.write(@email, search)
       end
 
       def show_car
@@ -67,37 +71,16 @@ module Lib
       end
 
       def sign_up
-        return unless email
-        return unless password
-
-        @user.call(@email, @password)
-        @console.text_with_params('user.login_welcome', @email)
-      end
-
-      def email
-        @email = @console.input('input.user.email')
-        return @console.print_text('user.incorrect_email') unless email?(@email)
-
-        return @email unless @user.unique_email?(@email)
-
-        @console.print_text('user.existing')
-      end
-
-      def password
-        @password = @console.input('input.user.password')
-        return @password if password?(@password)
-
-        @console.print_text('user.incorrect_password')
+        @authentication.sign_up
       end
 
       def log_in
-        @email = @console.input('input.user.email')
-        password = @console.input('input.user.password')
-        if @user.login(@email, password)
-          @console.text_with_params('user.login_welcome', @email)
-        else
-          @console.print_text('user.uncorected_data', :light_green) unless @user.admin
-        end
+        @authentication.log_in
+      end
+
+      def logout
+        @authentication.logout
+        @console.print_text('menu.go_out', :light_green)
       end
 
       def help
@@ -119,11 +102,6 @@ module Lib
 
       def delete
         @admin.delete_advertisement
-      end
-
-      def logout
-        @user.logout
-        @console.print_text('menu.go_out', :light_green)
       end
 
       def close

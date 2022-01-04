@@ -8,7 +8,6 @@ module Lib
 
       def initialize
         @database = Database.new.read
-        @user = User.new
         @console = Console::Console.new
         @rules = { make: '',
                    model: '',
@@ -25,9 +24,7 @@ module Lib
 
         statistic = Operations::Statistic.new(@rules, result_fast_search.length).call
         @console.print_statistic(result_fast_search, statistic)
-        return unless @user.logged
-
-        UserSearches.write(@email, @rules)
+        @rules
       end
 
       private
