@@ -35,7 +35,7 @@ module Lib
       /^[1-9]+[0-9]*$/.match?(obj)
     end
 
-    def fast_search?(rules)
+    def attribute?(rules)
       /^((make|model|year|price)=[a-zA-Z0-9]+)/.match?(rules)
     end
 

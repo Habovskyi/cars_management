@@ -18,7 +18,10 @@ module Lib
       end
 
       def call
-        return unless update_rules
+        fast_rules = @console.input('input.search.fast')
+        return @console.print_text('input.search.error') unless attribute?(fast_rules)
+
+        return unless update_rules(fast_rules)
 
         result_fast_search = Operations::Searcher.new(@rules, @database).call
 
@@ -29,10 +32,7 @@ module Lib
 
       private
 
-      def update_rules
-        fast_rules = @console.input('input.search.fast')
-        return @console.print_text('input.search.error') unless fast_search?(fast_rules)
-
+      def update_rules(fast_rules)
         search_rules = string_to_hash(fast_rules)
         return @console.print_text('input.search.error_format') unless correct_value?(search_rules)
 
