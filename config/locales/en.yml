@@ -9,12 +9,15 @@ en:
         year_to: 'Please choose year to:'
         price_from: 'Please choose price from:'
         price_to: 'Please choose price to:'
+      fast: 'Enter search options in one line:'
+      error: 'The data entered is not correct! Expected attributes: make, model, year, price!'
+      error_format: 'Incorrect data format!'
     sort:
-        direction: 'Please choose sort direction(desc|asc):'
-        type: 'Please choose sort option (date_added|price):'
+      direction: 'Please choose sort direction(desc|asc):'
+      type: 'Please choose sort option (date_added|price):'
     user:
-        email: 'Please input email:'
-        password: 'Please input password:'
+      email: 'Please input email:'
+      password: 'Please input password:'
   print:
     result: 'Result'
     searches: 'My Searches'
@@ -40,6 +43,7 @@ en:
     help: 'Help'
     log_in: 'Log in'
     sign_up: 'Sign up'
+    fast_search: 'Fast search'
     my_searches: 'My Searches'
     create: 'Create an Advertisement'
     update: 'Update an Advertisement'
@@ -107,7 +111,3 @@ en:
   rake:
     clear: 'The database has been cleared.'
     add_car: 'cars were added to the database.'
-
-
-
-

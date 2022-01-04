@@ -12,36 +12,33 @@ module Lib
       def call
         @result = @database
         @user_rules.each do |user_key, user_value|
-          @result = compare(user_key, user_value)
+          @result = public_send(user_key, user_key, user_value) unless user_value.eql?('')
         end
         @result
       end
 
-      private
-
-      def compare(key, value)
-        case key
-        when :make, :model
-          compare_string(key, value)
-        when :year_from, :price_from
-          compare_number_from(key, value)
-        when :year_to, :price_to
-          compare_number_to(key, value)
-        else
-          @result
-        end
+      def make(key, value)
+        @result.select { |cars| cars[key.to_s].to_s.casecmp?(value) }
       end
 
-      def compare_string(key, value)
-        @result.select { |cars| cars[key.to_s].casecmp(value).zero? }
+      def model(key, value)
+        @result.select { |cars| cars[key.to_s].to_s.casecmp?(value) }
       end
 
-      def compare_number_to(key, value)
-        @result.select { |cars| key == :year_to ? (cars['year'] <= value.to_i) : (cars['price'] <= value.to_i) }
+      def year_to(_key, value)
+        @result.select { |cars| cars['year'].to_i <= value.to_i }
       end
 
-      def compare_number_from(key, value)
-        @result.select { |cars| key == :year_from ? (cars['year'] >= value.to_i) : (cars['price'] >= value.to_i) }
+      def year_from(_key, value)
+        @result.select { |cars| cars['year'].to_i >= value.to_i }
+      end
+
+      def price_to(_key, value)
+        @result.select { |cars| cars['price'].to_i <= value.to_i }
+      end
+
+      def price_from(_key, value)
+        @result.select { |cars| cars['price'].to_i <= value.to_i }
       end
     end
   end

@@ -5,8 +5,8 @@ module Lib
   module Console
     class Menu
       include Validator
-      MENU = %i[search_car show_car help log_in sign_up close].freeze
-      MENU_AUTHORIZED = %i[search_car show_car my_searches help logout close].freeze
+      MENU = %i[search_car fast_search show_car help log_in sign_up close].freeze
+      MENU_AUTHORIZED = %i[search_car fast_search show_car my_searches help logout close].freeze
       MENU_ADMIN = %i[create update delete logout].freeze
 
       def initialize
@@ -41,11 +41,7 @@ module Lib
 
       def select_item
         number = @console.input('menu.choice')
-        if (/^[1-#{@type_menu.size}]$/).match(number)
-          send(@type_menu[number.to_i - 1])
-        else
-          @console.print_text('menu.error')
-        end
+        menu?(@type_menu, number) ? send(@type_menu[number.to_i - 1]) : @console.print_text('menu.error')
       end
 
       def search_car
@@ -54,10 +50,14 @@ module Lib
         @user_rules = @console.input_user_rules
         @app.search_rules(@user_rules)
         @app.sort_rules(@console.input_sort_rules)
-        @console.print_statistic(@app.search, @app.statistic)
+        @console.print_statistic(@app.sorter, @app.statistic)
         return unless @user.logged
 
         UserSearches.write(@email, @user_rules)
+      end
+
+      def fast_search
+        Operations::FastSearch.new.call
       end
 
       def show_car
