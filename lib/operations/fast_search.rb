@@ -18,7 +18,8 @@ module Lib
       end
 
       def call
-        fast_rules = @console.input('input.search.fast')
+        @console.print_text('input.search.format', 'light_green')
+        fast_rules = @console.input('input.search.fast_search')
         return @console.print_text('input.search.error') unless attribute?(fast_rules)
 
         return unless update_rules(fast_rules)

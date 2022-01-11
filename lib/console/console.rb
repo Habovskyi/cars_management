@@ -36,8 +36,8 @@ module Lib
         puts I18n.t(text.to_s).colorize(color.to_sym)
       end
 
-      def text_with_params(text, param)
-        puts I18n.t(text, param: param).colorize(:light_green)
+      def text_with_params(text, param, color = :light_blue)
+        puts I18n.t(text, param: param).colorize(color.to_sym)
       end
 
       def print_statistic(search_result, statistic)

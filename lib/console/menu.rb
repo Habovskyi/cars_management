@@ -8,6 +8,7 @@ module Lib
       MENU = %i[search_car fast_search show_car help log_in sign_up close].freeze
       MENU_AUTHORIZED = %i[search_car fast_search show_car my_searches help logout close].freeze
       MENU_ADMIN = %i[create update delete logout].freeze
+      ATTEMPT = 5
 
       def initialize
         @console = Console.new
@@ -58,8 +59,15 @@ module Lib
       end
 
       def fast_search
-        search = Operations::FastSearch.new.call
-        return unless @authentication.logged && search
+        correct = false
+        count = 0
+        search = Operations::FastSearch.new
+        until correct
+          correct = search.call
+          @console.text_with_params('input.search.attempt', (ATTEMPT - count += 1)) unless correct
+          return @console.print_text('input.search.attempt_end', 'light_red') if count.eql?(ATTEMPT)
+        end
+        return unless @authentication.logged && correct
 
         UserSearches.write(@email, search)
       end

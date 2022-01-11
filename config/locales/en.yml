@@ -9,9 +9,12 @@ en:
         year_to: 'Please choose year to:'
         price_from: 'Please choose price from:'
         price_to: 'Please choose price to:'
-      fast: 'Enter search options in one line:'
+      format: "\t\t\tFast search\nTerms of use:\n -Format: make=Ford; model=Focus; year=2020; price=25000\n -Language: en"
+      fast_search: 'Enter data in one line according to the format:'
       error: 'The data entered is not correct! Expected attributes: make, model, year, price!'
       error_format: 'Incorrect data format!'
+      attempt: 'You have %{param} more attempts!'
+      attempt_end: 'You used all the attempts. Please try again later!'
     sort:
       direction: 'Please choose sort direction(desc|asc):'
       type: 'Please choose sort option (date_added|price):'
