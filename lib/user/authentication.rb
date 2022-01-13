@@ -28,6 +28,7 @@ module Lib
     def log_in
       @email = @console.input('input.user.email')
       password = @console.input('input.user.password')
+
       if find_user(@email, password)
         @logged = true
         @console.text_with_params('user.login_welcome', @email)
@@ -45,6 +46,7 @@ module Lib
 
     def input_email
       @email = @console.input('input.user.email')
+
       return @console.print_text('user.incorrect_email') unless email?(@email)
 
       return @email unless unique_email?(@email, read_user)
@@ -61,6 +63,7 @@ module Lib
 
     def find_user(email, password)
       return unless read_user
+
       return if (@admin = admin?(email, password))
 
       @users.detect { |user| user[:email] == email && user[:password] == password }
