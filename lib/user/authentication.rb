@@ -17,8 +17,8 @@ module Lib
     end
 
     def sign_up
-      return unless input email
-      return unless input password
+      return unless input_email
+      return unless input_password
 
       @user.call(@email, @password)
       @logged = true

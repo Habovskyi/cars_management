@@ -5,6 +5,7 @@ module Lib
   module Operations
     class FastSearch
       include Validator
+      attr_reader :user_rules
 
       def initialize
         @database = Database.new.read
@@ -37,7 +38,7 @@ module Lib
         search_rules = string_to_hash(fast_rules)
         return @console.print_text('input.search.error_format') unless correct_value?(search_rules)
 
-        transform_hash(search_rules)
+        @user_rules = transform_hash(search_rules)
       end
 
       def string_to_hash(fast_rules)

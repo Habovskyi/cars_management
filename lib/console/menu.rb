@@ -16,6 +16,7 @@ module Lib
         @user = User.new
         @admin = Administrator.new
         @authentication = Authentication.new
+        @fast_search = Operations::FastSearch.new
       end
 
       def welcome
@@ -55,16 +56,15 @@ module Lib
         @console.print_statistic(@app.sorter, @app.statistic)
         return unless @authentication.logged
 
-        UserSearches.write(@email, @user_rules)
+        UserSearches.write(@authentication.email, @user_rules)
       end
 
       def fast_search
         correct = false
         count = 0
-        search = Operations::FastSearch.new
 
         until correct
-          correct = search.call
+          correct = @fast_search.call
           @console.text_with_params('input.search.attempt', (ATTEMPT - count += 1)) unless correct
 
           return @console.print_text('input.search.attempt_end', 'light_red') if count.eql?(ATTEMPT)
@@ -72,7 +72,7 @@ module Lib
 
         return unless @authentication.logged && correct
 
-        UserSearches.write(@email, search)
+        UserSearches.write(@authentication.email, @fast_search.user_rules)
       end
 
       def show_car
@@ -99,7 +99,7 @@ module Lib
       end
 
       def my_searches
-        searches = UserSearches.exist_user?(@email)
+        searches = UserSearches.exist_user?(@authentication.email)
         searches ? @console.print_searches(searches[:user_rules]) : @console.print_text('user_searches.no_searches')
       end
 
