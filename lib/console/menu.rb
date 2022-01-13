@@ -5,15 +5,18 @@ module Lib
   module Console
     class Menu
       include Validator
-      MENU = %i[search_car show_car help log_in sign_up close].freeze
-      MENU_AUTHORIZED = %i[search_car show_car my_searches help logout close].freeze
+      MENU = %i[search_car fast_search show_car help log_in sign_up close].freeze
+      MENU_AUTHORIZED = %i[search_car fast_search show_car my_searches help logout close].freeze
       MENU_ADMIN = %i[create update delete logout].freeze
+      ATTEMPT = 5
 
       def initialize
         @console = Console.new
         @app = Lib::App.new
         @user = User.new
         @admin = Administrator.new
+        @authentication = Authentication.new
+        @fast_search = Operations::FastSearch.new
       end
 
       def welcome
@@ -24,8 +27,8 @@ module Lib
       end
 
       def print_options
-        @type_menu = @user.logged ? MENU_AUTHORIZED : MENU
-        @type_menu = MENU_ADMIN if @user.admin
+        @type_menu = @authentication.logged ? MENU_AUTHORIZED : MENU
+        @type_menu = MENU_ADMIN if @authentication.admin
         @console.print_menu(@type_menu)
       end
 
@@ -41,11 +44,7 @@ module Lib
 
       def select_item
         number = @console.input('menu.choice')
-        if (/^[1-#{@type_menu.size}]$/).match(number)
-          send(@type_menu[number.to_i - 1])
-        else
-          @console.print_text('menu.error')
-        end
+        menu?(@type_menu, number) ? send(@type_menu[number.to_i - 1]) : @console.print_text('menu.error')
       end
 
       def search_car
@@ -54,10 +53,26 @@ module Lib
         @user_rules = @console.input_user_rules
         @app.search_rules(@user_rules)
         @app.sort_rules(@console.input_sort_rules)
-        @console.print_statistic(@app.search, @app.statistic)
-        return unless @user.logged
+        @console.print_statistic(@app.sorter, @app.statistic)
+        return unless @authentication.logged
 
-        UserSearches.write(@email, @user_rules)
+        UserSearches.write(@authentication.email, @user_rules)
+      end
+
+      def fast_search
+        correct = false
+        count = 0
+
+        until correct
+          correct = @fast_search.call
+          @console.text_with_params('input.search.attempt', (ATTEMPT - count += 1)) unless correct
+
+          return @console.print_text('input.search.attempt_end', 'light_red') if count.eql?(ATTEMPT)
+        end
+
+        return unless @authentication.logged && correct
+
+        UserSearches.write(@authentication.email, @fast_search.user_rules)
       end
 
       def show_car
@@ -67,37 +82,16 @@ module Lib
       end
 
       def sign_up
-        return unless email
-        return unless password
-
-        @user.call(@email, @password)
-        @console.text_with_params('user.login_welcome', @email)
-      end
-
-      def email
-        @email = @console.input('input.user.email')
-        return @console.print_text('user.incorrect_email') unless email?(@email)
-
-        return @email unless @user.unique_email?(@email)
-
-        @console.print_text('user.existing')
-      end
-
-      def password
-        @password = @console.input('input.user.password')
-        return @password if password?(@password)
-
-        @console.print_text('user.incorrect_password')
+        @authentication.sign_up
       end
 
       def log_in
-        @email = @console.input('input.user.email')
-        password = @console.input('input.user.password')
-        if @user.login(@email, password)
-          @console.text_with_params('user.login_welcome', @email)
-        else
-          @console.print_text('user.uncorected_data', :light_green) unless @user.admin
-        end
+        @authentication.log_in
+      end
+
+      def logout
+        @authentication.logout
+        @console.print_text('menu.go_out', :light_green)
       end
 
       def help
@@ -105,7 +99,7 @@ module Lib
       end
 
       def my_searches
-        searches = UserSearches.exist_user?(@email)
+        searches = UserSearches.exist_user?(@authentication.email)
         searches ? @console.print_searches(searches[:user_rules]) : @console.print_text('user_searches.no_searches')
       end
 
@@ -119,11 +113,6 @@ module Lib
 
       def delete
         @admin.delete_advertisement
-      end
-
-      def logout
-        @user.logout
-        @console.print_text('menu.go_out', :light_green)
       end
 
       def close

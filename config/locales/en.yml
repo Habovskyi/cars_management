@@ -9,12 +9,18 @@ en:
         year_to: 'Please choose year to:'
         price_from: 'Please choose price from:'
         price_to: 'Please choose price to:'
+      format: "\t\t\tFast search\nTerms of use:\n -Format: make=Ford; model=Focus; year=2020; price=25000\n -Language: en"
+      fast_search: 'Enter data in one line according to the format:'
+      error: 'The data entered is not correct! Expected attributes: make, model, year, price!'
+      error_format: 'Incorrect data format!'
+      attempt: 'You have %{param} more attempts!'
+      attempt_end: 'You used all the attempts. Please try again later!'
     sort:
-        direction: 'Please choose sort direction(desc|asc):'
-        type: 'Please choose sort option (date_added|price):'
+      direction: 'Please choose sort direction(desc|asc):'
+      type: 'Please choose sort option (date_added|price):'
     user:
-        email: 'Please input email:'
-        password: 'Please input password:'
+      email: 'Please input email:'
+      password: 'Please input password:'
   print:
     result: 'Result'
     searches: 'My Searches'
@@ -40,6 +46,7 @@ en:
     help: 'Help'
     log_in: 'Log in'
     sign_up: 'Sign up'
+    fast_search: 'Fast search'
     my_searches: 'My Searches'
     create: 'Create an Advertisement'
     update: 'Update an Advertisement'
@@ -52,6 +59,7 @@ en:
     end: 'The program completed successfully!'
   help:
     how_search: 'How to find car?'
+    how_fast_search: 'How to do a fast search?'
     how_show: 'How to view all available cars?'
     how_exit: 'How to close the program?'
     how_login: 'How to login?'
@@ -59,6 +67,7 @@ en:
     how_logout: 'How to logout?'
     how_my_searches: 'How to see my searches?'
     ans_search: "To search for a car, select menu item 'Search car'.\nEnter search criteria as needed."
+    ans_fast_search: "In the menu, select 'Fast search'."
     ans_show: "To view all available cars, select menu 'Show car'."
     ans_exit: "To exit the program, select menu item 'Exit'."
     ans_login: "To login, you need to select the menu item 'Login'.\nEnter the registered e-mail and password"
@@ -107,7 +116,3 @@ en:
   rake:
     clear: 'The database has been cleared.'
     add_car: 'cars were added to the database.'
-
-
-
-
