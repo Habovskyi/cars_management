@@ -8,7 +8,6 @@ module Lib
       MENU = %i[search_car fast_search show_car help log_in sign_up close].freeze
       MENU_AUTHORIZED = %i[search_car fast_search show_car my_searches help logout close].freeze
       MENU_ADMIN = %i[create update delete logout].freeze
-      ATTEMPT = 5
 
       def initialize
         @console = Console.new
@@ -20,9 +19,8 @@ module Lib
       end
 
       def welcome
-        language = @console.input('menu.lang').downcase
-        language = 'en' if language != 'uk'
-        I18n.default_locale = :"#{language}"
+        select_language
+
         show_menu
       end
 
@@ -50,25 +48,17 @@ module Lib
       def search_car
         return @console.print_text('empty_database') unless @search.data
 
-        @user_rules = @console.input_user_rules
-        @search.search_rules(@user_rules)
-        @search.sort_rules(@console.input_sort_rules)
-        @console.print_statistic(@search.sorter, @search.statistic)
+        @search.call
+
         return unless @authentication.logged
 
         User::Searches.write(@authentication.email, @user_rules)
       end
 
       def fast_search
-        correct = false
-        count = 0
+        result = @fast_search.call
 
-        until correct
-          correct = @fast_search.call
-          @console.text_with_params('input.search.attempt', (ATTEMPT - count += 1)) unless correct
-
-          return @console.print_text('input.search.attempt_end', 'light_red') if count.eql?(ATTEMPT)
-        end
+        return unless result
 
         return unless @authentication.logged && correct
 
@@ -118,6 +108,12 @@ module Lib
       def close
         @console.print_text('menu.end')
         exit
+      end
+
+      def select_language
+        language = @console.input('menu.lang').downcase
+        language = 'en' if language != 'uk'
+        I18n.default_locale = :"#{language}"
       end
     end
   end

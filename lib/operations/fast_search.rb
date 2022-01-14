@@ -7,6 +7,8 @@ module Lib
       include Validator
       attr_reader :user_rules
 
+      ATTEMPT = 5
+
       def initialize
         @database = Database.new.read
         @console = Interface::Console.new
@@ -19,6 +21,21 @@ module Lib
       end
 
       def call
+        correct = false
+        count = 0
+
+        until correct
+          correct = engine
+          @console.text_with_params('input.search.attempt', (ATTEMPT - count += 1)) unless correct
+
+          return @console.print_text('input.search.attempt_end', 'light_red') if count.eql?(ATTEMPT)
+        end
+        correct
+      end
+
+      private
+
+      def engine
         @console.print_text('input.search.format', 'light_green')
         fast_rules = @console.input('input.search.fast_search')
         return @console.print_text('input.search.error') unless attribute?(fast_rules)
@@ -31,8 +48,6 @@ module Lib
         @console.print_statistic(result_fast_search, statistic)
         @rules
       end
-
-      private
 
       def update_rules(fast_rules)
         search_rules = string_to_hash(fast_rules)

@@ -7,19 +7,28 @@ module Lib
       attr_reader :data
 
       def initialize
+        @console = Interface::Console.new
         @data = Database.new.read
+      end
+
+      def call
+        search_rules
+        sort_rules
+        @console.print_statistic(sorter, statistic)
       end
 
       def show_car
         @data
       end
 
-      def search_rules(rules)
-        @search_rules = rules
+      private
+
+      def search_rules
+        @search_rules = @console.input_user_rules
       end
 
-      def sort_rules(rules)
-        @sort_rules = rules
+      def sort_rules
+        @sort_rules = @console.input_sort_rules
       end
 
       def data_update_number
