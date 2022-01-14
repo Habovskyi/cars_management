@@ -2,4 +2,4 @@
 
 require_relative 'lib/autoload'
 
-Lib::Console::Menu.new.welcome
+Lib::Interface::Menu.new.welcome
