@@ -2,7 +2,7 @@
 
 # Class for logic menu
 module Lib
-  module Console
+  module Interface
     class Menu
       include Validator
       MENU = %i[search_car fast_search show_car help log_in sign_up close].freeze
@@ -12,10 +12,10 @@ module Lib
 
       def initialize
         @console = Console.new
-        @app = Lib::App.new
-        @user = User.new
-        @admin = Administrator.new
-        @authentication = Authentication.new
+        @search = Operations::SearchEngine.new
+        @user = User::User.new
+        @admin = User::Administrator.new
+        @authentication = User::Authentication.new
         @fast_search = Operations::FastSearch.new
       end
 
@@ -48,15 +48,15 @@ module Lib
       end
 
       def search_car
-        return @console.print_text('empty_database') unless @app.data
+        return @console.print_text('empty_database') unless @search.data
 
         @user_rules = @console.input_user_rules
-        @app.search_rules(@user_rules)
-        @app.sort_rules(@console.input_sort_rules)
-        @console.print_statistic(@app.sorter, @app.statistic)
+        @search.search_rules(@user_rules)
+        @search.sort_rules(@console.input_sort_rules)
+        @console.print_statistic(@search.sorter, @search.statistic)
         return unless @authentication.logged
 
-        UserSearches.write(@authentication.email, @user_rules)
+        User::Searches.write(@authentication.email, @user_rules)
       end
 
       def fast_search
@@ -72,13 +72,13 @@ module Lib
 
         return unless @authentication.logged && correct
 
-        UserSearches.write(@authentication.email, @fast_search.user_rules)
+        User::Searches.write(@authentication.email, @fast_search.user_rules)
       end
 
       def show_car
-        return @console.print_text('empty_database') unless @app.data
+        return @console.print_text('empty_database') unless @search.data
 
-        @console.print_result(@app.show_car)
+        @console.print_result(@search.show_car)
       end
 
       def sign_up
@@ -99,7 +99,7 @@ module Lib
       end
 
       def my_searches
-        searches = UserSearches.exist_user?(@authentication.email)
+        searches = User::Searches.exist_user?(@authentication.email)
         searches ? @console.print_searches(searches[:user_rules]) : @console.print_text('user_searches.no_searches')
       end
 

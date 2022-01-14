@@ -2,7 +2,7 @@
 
 # Class for input and output data
 module Lib
-  module Console
+  module Interface
     class Console
       def initialize
         @user_rules = { make: '',

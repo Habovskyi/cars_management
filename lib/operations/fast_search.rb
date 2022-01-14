@@ -9,7 +9,7 @@ module Lib
 
       def initialize
         @database = Database.new.read
-        @console = Console::Console.new
+        @console = Interface::Console.new
         @rules = { make: '',
                    model: '',
                    year_from: '',

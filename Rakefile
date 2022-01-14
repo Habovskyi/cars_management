@@ -6,7 +6,7 @@ require 'i18n'
 require 'colorize'
 require_relative 'lib/database'
 require_relative 'config/i18n_config'
-require_relative 'lib/console/console'
+require_relative 'lib/interface/interinterface'
 
 I18n.default_locale = :en
 
